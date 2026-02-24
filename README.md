@@ -7,7 +7,7 @@
 
 ### Name: Chow Sheung Yau Thomas
 ### Student Id: 21055694
-### Email: sytchow@connect.ust.hl
+### Email: sytchow@connect.ust.hk
 
 ---
 
