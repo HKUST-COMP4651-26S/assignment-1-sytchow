@@ -5,9 +5,9 @@
 
 ---
 
-### Name: 
-### Student Id: 
-### Email: 
+### Name: Chow Sheung Yau Thomas
+### Student Id: 21055694
+### Email: sytchow@connect.ust.hl
 
 ---
 
@@ -15,7 +15,19 @@
 
 1. (1 mark) Report the name of measurement tool used in your measurements (you are free to choose *any* open source measurement software as long as it can measure CPU and memory performance). Please describe your configuration of the measurement tool, and explain why you set such a value for each parameter. Explain what the values obtained from measurement results represent (e.g., the value of your measurement result can be the execution time for a scientific computing task, a score given by the measurement tools or something else).
 
-    > Your answer goes here.
+    > measurement tools:sysbench
+    >Sysbench is modular and supports dedicated tests for both CPU and memory, making it ideal for this assignment.
+    >
+    > Configuration:
+    > CPU test command:"sysbench cpu --threads=$(nproc) --time=60 --cpu-max-prime=20000 run"
+    > --threads=$(nproc): Matches the number of vCPUs available on the instance
+    > --time=60: Runs the benchmark for 60 seconds
+    > --cpu-max-prime=20000: Sets a computationally intensive prime number calculation threshold. This value stresses the CPU effectively
+    >
+    > memory test command: "sysbench memory --threads=$(nproc) --memory-block-size=1M --memory-total-size=10G run"
+    > --threads=$(nproc): Again matches the instance's vCPU count
+    > --memory-block-size=1M: Uses 1 MiB blocks, which is a standard size for measuring memory bandwidth
+    > --memory-total-size=10G: Ensures the test transfers a total of 10 GiB of data
 
 2. (1 mark) Run your measurement tool on general purpose `t2.micro`, `t2.medium`, and `c5d.large` Linux instances, respectively, and find the performance differences among these instances. Launch all the instances in the **US East (N. Virginia)** region. Does the performance of EC2 instances increase commensurate with the increase of the number of vCPUs and memory resource?
 
@@ -23,9 +35,9 @@
 
     | Size        | CPU performance | Memory performance |
     | ----------- | --------------- | ------------------ |
-    | `t2.micro` |                 |                    |
-    | `t2.medium`  |                 |                    |
-    | `c5d.large` |                 |                    |
+    | `t2.micro` |     890.85 (events per second)            |     19133.57 MiB/sec               |
+    | `t2.medium`  |     1548.41            |         28230.18 MiB/sec           |
+    | `c5d.large` |         704.01        |         19269.03 MiB/sec           |
 
     > Region: US East (N. Virginia). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI.
 
@@ -35,12 +47,12 @@
 
     | Type                      | TCP b/w (Mbps) | RTT (ms) |
     | ------------------------- | -------------- | -------- |
-    | `t3.medium` - `t3.medium` |                |          |
-    | `m5.large` - `m5.large`   |                |          |
-    | `c5n.large` - `c5n.large` |                |          |
-    | `t3.medium` - `c5n.large` |                |          |
-    | `m5.large` - `c5n.large`  |                |          |
-    | `m5.large` - `t3.medium`  |                |          |
+    | `t3.medium` - `t3.medium` |     4540           |     0.311     |
+    | `m5.large` - `m5.large`   |       4960         |    0.212      |
+    | `c5n.large` - `c5n.large` |      4960          |     0.151     |
+    | `t3.medium` - `c5n.large` |        4720        |   0.455       |
+    | `m5.large` - `c5n.large`  |        4960        |    0.518      |
+    | `m5.large` - `t3.medium`  |       4640         |    0.916      |
 
     > Region: US East (N. Virginia). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI. Note: Use private IP address when using iPerf within the same region. You'll need iPerf for measuring TCP bandwidth and Ping for measuring Round-Trip time.
 
