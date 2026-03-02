@@ -24,10 +24,14 @@
     > --time=60: Runs the benchmark for 60 seconds
     > --cpu-max-prime=20000: Sets a computationally intensive prime number calculation threshold. This value stresses the CPU effectively
     >
+    > values unit:Events per second = number of these prime checks completed per second (higher = better / faster CPU performance).
+    >
     > memory test command: "sysbench memory --threads=$(nproc) --memory-block-size=1M --memory-total-size=10G run"
     > --threads=$(nproc): Again matches the instance's vCPU count
     > --memory-block-size=1M: Uses 1 MiB blocks, which is a standard size for measuring memory bandwidth
     > --memory-total-size=10G: Ensures the test transfers a total of 10 GiB of data
+    >
+    > values unit: MiB/sec = measures memory bandwidth, how fast the system can read from or write to RAM.
 
 2. (1 mark) Run your measurement tool on general purpose `t2.micro`, `t2.medium`, and `c5d.large` Linux instances, respectively, and find the performance differences among these instances. Launch all the instances in the **US East (N. Virginia)** region. Does the performance of EC2 instances increase commensurate with the increase of the number of vCPUs and memory resource?
 
